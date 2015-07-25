@@ -7,22 +7,22 @@ permissions:
   - object: /var/www/jwt-authentication
     pattern: "**"
     except: [artisan]
-    owner: www-data
-    group: www-data
+    owner: nginx
+    group: nginx
     mode: 664
     type:
       - file
   - object: /var/www/jwt-authentication
     pattern: "**"
-    owner: www-data
-    group: www-data
+    owner: nginx
+    group: nginx
     mode: 775
     type:
       - directory
   - object: /var/www/jwt-authentication
     pattern: "artisan"
-    owner: www-data
-    group: www-data
+    owner: nginx
+    group: nginx
     mode: 775
     type:
       - file
