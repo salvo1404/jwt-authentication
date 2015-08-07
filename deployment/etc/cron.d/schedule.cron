@@ -1,0 +1,6 @@
+# /etc/cron.d/#PROJECT_NAME#: crontab fragment for Laravel
+#  This is used to run the scheduler for Laravel which controls
+#  which commands to run within the application
+
+# run the laravel scheduler every minute and check for commands to run
+* * * * *	root	php /var/www/#PROJECT_NAME#/artisan schedule:run 1>> /dev/null 2>&1
