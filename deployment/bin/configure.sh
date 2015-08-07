@@ -14,8 +14,7 @@ chown -R www-data: bootstrap/cache
 
 # configure services
 ./deployment/bin/config_nginx.sh
+./deployment/bin/start_services.sh
 # run laravel setup
 ./deployment/bin/config_laravel.sh
 ./deployment/bin/config_cron.sh
-# restart services
-./deployment/bin/start_services.sh
