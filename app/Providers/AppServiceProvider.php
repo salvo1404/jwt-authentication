@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use League\Fractal\Serializer\DataArraySerializer;
+use League\Fractal\Serializer\SerializerAbstract;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            SerializerAbstract::class,
+            DataArraySerializer::class
+        );
     }
 }
