@@ -58,6 +58,26 @@ class UserController extends Controller
     }
 
     /**
+     * @Get("api/users/{id}", as="api.users.show", where={"id": "[0-9]+"})
+     *
+     * @Middleware("jwt.refresh")
+     * @Middleware("active")
+     *
+     * @param $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        $user = $this->userRepository->findById($id);
+        if (!$user) {
+            return $this->respondNotFound('User Not Found');
+        }
+
+        return $this->fractal->item($user, new ProfileTransformer);
+    }
+
+    /**
      * @Post("api/users", as="api.users")
      *
      * @Middleware("guest")
