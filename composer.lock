@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "196453a52afe17356e4ba85d142b5380",
+    "hash": "21e6febd0018a10b8be2c477cec11198",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1032,6 +1032,45 @@
                 "rest"
             ],
             "time": "2015-03-19 15:16:43"
+        },
+        {
+            "name": "mofodojodino/profanity-filter",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mofodojodino/ProfanityFilter.git",
+                "reference": "12b2deab71bb2c6b259a425968a8669d516d16b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mofodojodino/ProfanityFilter/zipball/12b2deab71bb2c6b259a425968a8669d516d16b7",
+                "reference": "12b2deab71bb2c6b259a425968a8669d516d16b7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dean Tedesco",
+                    "email": "dino@tedesco.net.au"
+                }
+            ],
+            "description": "Filters out profanities from strings.",
+            "time": "2015-08-11 04:05:40"
         },
         {
             "name": "monolog/monolog",
@@ -2738,45 +2777,6 @@
             "time": "2015-04-02 19:54:00"
         },
         {
-            "name": "mofodojodino/profanity-filter",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mofodojodino/ProfanityFilter.git",
-                "reference": "fcbf0006689b11ad1de75b427c08a10ba5a7eb5a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mofodojodino/ProfanityFilter/zipball/fcbf0006689b11ad1de75b427c08a10ba5a7eb5a",
-                "reference": "fcbf0006689b11ad1de75b427c08a10ba5a7eb5a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "~2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dean Tedesco",
-                    "email": "dino@tedesco.net.au"
-                }
-            ],
-            "description": "Filters out profanities from strings.",
-            "time": "2014-09-02 23:46:24"
-        },
-        {
             "name": "phpdocumentor/reflection-docblock",
             "version": "2.0.4",
             "source": {
@@ -3840,8 +3840,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "laravelcollective/annotations": 20,
-        "sorskod/larasponse": 20,
-        "mofodojodino/profanity-filter": 20
+        "sorskod/larasponse": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
