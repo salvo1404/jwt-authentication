@@ -10,7 +10,6 @@
         .controller('UserController', UserController);
 
     function UserController($http) {
-
         var vm = this;
 
         vm.users;
