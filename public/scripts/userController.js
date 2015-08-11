@@ -22,10 +22,11 @@
             // on the Laravel side and will return the list of users
             $http.get('api/users', {
                 headers: {'Authorization': 'Bearer '.concat(localStorage.token)}
-            }).success(function(users) {
-                vm.users = users;
-            }).error(function(error) {
-                vm.error = error;
+            }).success(function(data, status, headers, config) {
+                localStorage.setItem('token', headers('Authorization'));
+                vm.users = data;
+            }).error(function(data, status, headers, config) {
+                vm.error = data;
             });
         }
     }

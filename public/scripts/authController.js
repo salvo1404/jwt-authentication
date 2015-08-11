@@ -24,7 +24,6 @@
             $http.post('/api/auth/login', credentials)
                 .then(function(response) {
                     localStorage.setItem('token', response.data.data.token);
-
                     $state.go('users', {});
                 });
 
