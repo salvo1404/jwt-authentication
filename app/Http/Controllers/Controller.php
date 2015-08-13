@@ -9,6 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Response as IlluminateResponse;
 use JWTAuth;
 use Response;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 abstract class Controller extends BaseController
 {
@@ -25,12 +26,13 @@ abstract class Controller extends BaseController
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @return mixed
+     * @throws TokenInvalidException
      */
     public function getAuthenticatedUser()
     {
         if (! $user = JWTAuth::parseToken()->authenticate()) {
-            return null;
+            throw new TokenInvalidException;
         }
 
         return $user;
@@ -135,6 +137,18 @@ abstract class Controller extends BaseController
     protected function respondInvalidToken($message = 'Invalid Token')
     {
         return $this->setStatusCode(IlluminateResponse::HTTP_UNAUTHORIZED)->respondWithError($message);
+    }
+
+    /**
+     * @param string $message
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function respondInvalidCredentials($message = 'Invalid Credentials')
+    {
+        return $this
+            ->setStatusCode(IlluminateResponse::HTTP_UNAUTHORIZED)
+            ->respondWithError($message);
     }
 
     /**

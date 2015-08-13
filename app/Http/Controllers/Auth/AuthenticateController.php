@@ -119,7 +119,7 @@ class AuthenticateController extends Controller
         if ((int)$activation->code !== $request->get('code')) {
             return $this->respondNotFound('Wrong Code');
         }
-        if (!$user->is_active()) {
+        if (!$user->active()) {
             return $this->respondEntitySavingError('Issue in User Activating');
         }
         $this->activationRepository->setUsed($activation->email);
@@ -136,45 +136,21 @@ class AuthenticateController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function resend_code(ActivationCodeRequest $request)
+    public function resendCode(ActivationCodeRequest $request)
     {
         $email      = $request->get('email');
         $activation = $this->activationRepository->getByEmail($email);
         if (!$activation) {
-            return $this->respondNotFound('Email does not exist');
+            return $this->respondNotFound('Email Not Found in Activations Table');
         }
 
         $user = $this->userRepository->findByEmail($activation->email);
         if (!$user) {
             return $this->respondNotFound('User Not Found - Please Register');
         }
-//        Event::fire(new Activation($user, $activation->code));
+        Event::fire(new Activation($user, $activation->code));
 
         return $this->respondWithSuccess('Code Sent');
-    }
-
-    /**
-     * @param string $message
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    protected function respondInvalidCredentials($message = 'Invalid Credentials')
-    {
-        return $this
-            ->setStatusCode(IlluminateResponse::HTTP_UNAUTHORIZED)
-            ->respondWithError($message);
-    }
-
-    /**
-     * @param string $message
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    protected function respondTokenCreationFailed($message = 'Token Creation Failed')
-    {
-        return $this
-            ->setStatusCode(IlluminateResponse::HTTP_INTERNAL_SERVER_ERROR)
-            ->respondWithError($message);
     }
 
 }

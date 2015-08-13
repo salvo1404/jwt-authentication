@@ -23,13 +23,13 @@ class UserEditRequest extends Request
      */
     public function rules()
     {
+        $user = JWTAuth::parseToken()->authenticate();
+
         return [
             'first_name' => 'sometimes|string',
             'last_name'  => 'sometimes|string',
-            'email'      => 'sometimes|string',
+            'email'      => 'sometimes|email|unique:users,email,'.$user->id,
             'password'   => 'sometimes|string',
-            'employer'   => 'sometimes|string',
-            'state'      => 'sometimes|string',
         ];
     }
 }

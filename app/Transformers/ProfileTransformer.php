@@ -3,7 +3,7 @@
 namespace App\Transformers;
 
 
-use App\User;
+use App\Models\User;
 use League\Fractal\TransformerAbstract;
 
 class ProfileTransformer extends TransformerAbstract

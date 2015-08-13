@@ -3,13 +3,16 @@
 namespace App\Repositories;
 
 
-use App\User;
+use App\Exceptions\EntitySavingException;
+use App\Models\User;
 use Hash;
 
 class UserRepository implements UserRepositoryInterface
 {
     /**
      * @param $limit
+     *
+     * @return mixed
      */
     public function getPaginated($limit)
     {
@@ -21,7 +24,7 @@ class UserRepository implements UserRepositoryInterface
      *
      * @return mixed
      */
-    public function findById($id)
+    public function find($id)
     {
         return User::find($id);
     }
@@ -40,29 +43,18 @@ class UserRepository implements UserRepositoryInterface
      * @param $data
      *
      * @return User
-     *
+     * @throws EntitySavingException
      */
     public function store($data)
     {
-        $user = User::where('email', $data['email'])->first();
-        if ($user) {
-            return false;
-        }
-
         $user             = new User;
         $user->first_name = $data['first_name'];
         $user->last_name  = $data['last_name'];
         $user->email      = $data['email'];
         $user->password   = Hash::make($data['password']);
-        if (!empty($data['employer'])) {
-            $user->employer = $data['employer'];
-        }
-        if (!empty($data['state'])) {
-            $user->state = $data['state'];
-        }
 
         if(! $user->save()){
-            return false;
+            throw new EntitySavingException;
         }
 
         return $user;
@@ -100,14 +92,13 @@ class UserRepository implements UserRepositoryInterface
     }
 
     /**
-     * @param $id
-     * @param $password
+     * @param User $user
+     * @param      $password
      *
      * @return mixed
      */
-    public function resetPassword($id, $password)
+    public function resetPassword(User $user, $password)
     {
-        $user           = $this->findById($id);
         $user->password = Hash::make($password);
 
         return $user->save();

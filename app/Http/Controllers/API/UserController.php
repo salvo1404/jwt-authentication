@@ -50,9 +50,6 @@ class UserController extends Controller
     public function getProfile()
     {
         $user = $this->getAuthenticatedUser();
-        if (!$user) {
-            return $this->respondInvalidToken();
-        }
 
         return $this->fractal->item($user, new ProfileTransformer);
     }
@@ -69,7 +66,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = $this->userRepository->findById($id);
+        $user = $this->userRepository->find($id);
         if (!$user) {
             return $this->respondNotFound('User Not Found');
         }
@@ -91,11 +88,8 @@ class UserController extends Controller
         $data = $request->all();
         $user = $this->userRepository->store($data);
 
-        if (!$user) {
-            return $this->respondEntitySavingError('Unable to register new user');
-        }
         $code = $this->activationRepository->store($user->email);
-//        Event::fire(new Activation($user, $code));
+        Event::fire(new Activation($user, $code));
 
         $credentials = $request->only('email', 'password');
         try {
@@ -124,18 +118,8 @@ class UserController extends Controller
     public function update(UserEditRequest $request)
     {
         $user = $this->getAuthenticatedUser();
-        if (!$user) {
-            return $this->respondInvalidToken();
-        }
-        $data    = $request->all();
 
-        $check_existing_user = $this->userRepository->findByEmail($data['email']);
-        if($check_existing_user){
-            if($check_existing_user->id != $user->id){
-                return $this->respondEntitySavingError('Email already exists');
-            }
-        }
-        $updated = $this->userRepository->update($user, $data);
+        $updated = $this->userRepository->update($user, $request->all());
 
         if (!$updated) {
             return $this->respondEntitySavingError('Unable to update user profile');
