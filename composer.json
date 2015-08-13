@@ -12,7 +12,8 @@
         "fideloper/proxy": " ~3.0",
         "sorskod/larasponse": "dev-L5",
         "guzzlehttp/guzzle": "~6.0",
-        "mofodojodino/profanity-filter": "~1.0"
+        "mofodojodino/profanity-filter": "~1.0",
+        "barryvdh/laravel-cors": "0.7.x"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "~2.0",

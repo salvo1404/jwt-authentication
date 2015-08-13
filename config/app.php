@@ -152,6 +152,10 @@ return [
          * Development Service Providers
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        /*
+         * CORS Service Providers
+         */
+        Barryvdh\Cors\ServiceProvider::class,
     ],
     /*
     |--------------------------------------------------------------------------
