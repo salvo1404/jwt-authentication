@@ -156,6 +156,7 @@ return [
          * CORS Service Providers
          */
         Barryvdh\Cors\ServiceProvider::class,
+        Irazasyed\LaravelGAMP\LaravelGAMPServiceProvider::class,
     ],
     /*
     |--------------------------------------------------------------------------
@@ -183,6 +184,7 @@ return [
         'Eloquent'   => Illuminate\Database\Eloquent\Model::class,
         'Event'      => Illuminate\Support\Facades\Event::class,
         'File'       => Illuminate\Support\Facades\File::class,
+        'GAMP'       => Irazasyed\LaravelGAMP\Facades\GAMP::class,
         'Hash'       => Illuminate\Support\Facades\Hash::class,
         'Input'      => Illuminate\Support\Facades\Input::class,
         'Inspiring'  => Illuminate\Foundation\Inspiring::class,
