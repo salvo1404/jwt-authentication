@@ -13,7 +13,8 @@
         "sorskod/larasponse": "dev-L5",
         "guzzlehttp/guzzle": "~6.0",
         "mofodojodino/profanity-filter": "~1.0",
-        "barryvdh/laravel-cors": "0.7.x"
+        "barryvdh/laravel-cors": "0.7.x",
+        "irazasyed/laravel-gamp": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "~2.0",

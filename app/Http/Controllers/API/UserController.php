@@ -12,6 +12,7 @@ use App\Repositories\UserRepositoryInterface;
 use App\Transformers\AuthenticationTransformer;
 use App\Transformers\ProfileTransformer;
 use Event;
+use GAMP;
 use JWTAuth;
 use Response;
 use Sorskod\Larasponse\Larasponse;
@@ -50,6 +51,10 @@ class UserController extends Controller
     public function getProfile()
     {
         $user = $this->getAuthenticatedUser();
+
+        $gamp = GAMP::setClientId($user->id);
+        $gamp->setDocumentPath('/getProfile');
+        $gamp->sendPageview();
 
         return $this->fractal->item($user, new ProfileTransformer);
     }
